@@ -67,5 +67,16 @@ public class ConverterTest {
 
     @Test
     public void graphToScenario() {
+        Graph graph = GraphMarshaller.unmarshal(GRAPH_XML);
+
+        EtlScenario scenario = Converter.graphToScenario(graph);
+        Assert.assertEquals(1591262961630L, scenario.getId());
+        Assert.assertEquals("DEMO_SCENARIO", scenario.getName());
+        Assert.assertEquals(1, scenario.getVersion().intValue());
+        Assert.assertEquals("Demo scenario", scenario.getDescription());
+        Assert.assertEquals("DEMO", scenario.getOuterSystem());
+        Assert.assertEquals("Alexander", scenario.getAuthor());
+        Assert.assertEquals(LocalDateTime.of(2020, 1, 1, 12, 0, 0), scenario.getCreated());
+        Assert.assertEquals(LocalDateTime.of(2020, 1, 2, 15, 30, 0), scenario.getUpdated());
     }
 }
