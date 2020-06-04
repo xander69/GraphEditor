@@ -31,6 +31,7 @@ public class GraphParameter {
     private boolean required;
     @XmlAttribute
     private boolean secure;
+
     @XmlElement(name = "attr")
     private List<Attr> attrList;
 

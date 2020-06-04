@@ -29,7 +29,7 @@ public class GraphMarshallerTest {
             "            <Metadata id=\"Metadata0\">\n" +
             "                <Record name=\"SAMPLE_TABLE\" type=\"delimited\" fieldDelimiter=\";\" recordDelimiter=\"\\n\" previewAttachmentCharset=\"UTF-8\">\n" +
             "                    <Field name=\"Field1\" type=\"string\" size=\"255\" scale=\"0\">\n" +
-            "                        <attr name=\"description\">Description of Field1</attr>\n" +
+            "                        <attr name=\"description\"><![CDATA[Description of Field1]]></attr>\n" +
             "                    </Field>\n" +
             "                    <Field name=\"Field2\" type=\"date\" format=\"yyyy-MM-dd\"/>\n" +
             "                </Record>\n" +
@@ -47,7 +47,7 @@ public class GraphMarshallerTest {
             "        </Metadata>\n" +
             "        <GraphParameters>\n" +
             "            <GraphParameter name=\"PARAMETER1\" value=\"VALUE\" required=\"true\" secure=\"false\">\n" +
-            "                <attr name=\"displayName\">Parameter name</attr>\n" +
+            "                <attr name=\"displayName\"><![CDATA[Parameter name]]></attr>\n" +
             "            </GraphParameter>\n" +
             "            <GraphParameter name=\"PARAMETER2\" type=\"date\" format=\"yyyy-MM-dd\" value=\"2020-01-01\" required=\"false\" secure=\"true\"/>\n" +
             "        </GraphParameters>\n" +

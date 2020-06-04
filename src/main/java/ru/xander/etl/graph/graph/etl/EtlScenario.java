@@ -1,21 +1,21 @@
 package ru.xander.etl.graph.graph.etl;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * @author Alexander Shakhov
  */
-@Data
+@Getter
+@Setter
 @Builder
 public class EtlScenario {
 
     private long id;
-    private File file;
     private String name;
     private String author;
     private String description;
