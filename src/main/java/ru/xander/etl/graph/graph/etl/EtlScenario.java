@@ -25,6 +25,7 @@ public class EtlScenario {
     private LocalDateTime updated;
     private List<EtlParameter> startupParams;
     private List<EtlParameter> contextParams;
+    private List<EtlParameter> internalParams;
     private List<EtlStage> stages;
     private List<EtlMetadata> metadataList;
 

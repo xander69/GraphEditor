@@ -12,6 +12,13 @@ public final class Utils {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
+    public static Integer parseInt(String value) {
+        if (StringUtils.isEmpty(value)) {
+            return null;
+        }
+        return Integer.parseInt(value);
+    }
+
     public static String formatDateTime(LocalDateTime dateTime) {
         if (dateTime == null) {
             return null;
@@ -24,5 +31,12 @@ public final class Utils {
             return null;
         }
         return LocalDateTime.from(DATE_TIME_FORMATTER.parse(dateTime));
+    }
+
+    public static <T> T nvl(T value, T defaultValue) {
+        if (value == null) {
+            return defaultValue;
+        }
+        return value;
     }
 }

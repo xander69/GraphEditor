@@ -22,25 +22,39 @@ public class ConverterTest {
             "            </Record>\n" +
             "        </Metadata>\n" +
             "        <GraphParameters>\n" +
-            "            <GraphParameter name=\"SCENARIO_NAME\" value=\"DEMO_SCENARIO\" required=\"true\" secure=\"false\">\n" +
+            "            <GraphParameter name=\"SCENARIO_NAME\" required=\"true\" secure=\"false\">\n" +
+            "                <attr name=\"type\"><![CDATA[SYSTEM]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[DEMO_SCENARIO]]></attr>\n" +
             "                <attr name=\"displayName\"><![CDATA[Имя сценария]]></attr>\n" +
             "            </GraphParameter>\n" +
-            "            <GraphParameter name=\"SCENARIO_VERSION\" value=\"1\" required=\"true\" secure=\"false\">\n" +
+            "            <GraphParameter name=\"SCENARIO_VERSION\" required=\"true\" secure=\"false\">\n" +
+            "                <attr name=\"type\"><![CDATA[SYSTEM]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[1]]></attr>\n" +
             "                <attr name=\"displayName\"><![CDATA[Версия сценария]]></attr>\n" +
             "            </GraphParameter>\n" +
-            "            <GraphParameter name=\"SCENARIO_DESCRIPTION\" value=\"Demo scenario\" required=\"true\" secure=\"false\">\n" +
+            "            <GraphParameter name=\"SCENARIO_DESCRIPTION\" required=\"true\" secure=\"false\">\n" +
+            "                <attr name=\"type\"><![CDATA[SYSTEM]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[Demo scenario]]></attr>\n" +
             "                <attr name=\"displayName\"><![CDATA[Описание сценария]]></attr>\n" +
             "            </GraphParameter>\n" +
-            "            <GraphParameter name=\"SCENARIO_OUTER_SYSTEM\" value=\"DEMO\" required=\"true\" secure=\"false\">\n" +
+            "            <GraphParameter name=\"SCENARIO_OUTER_SYSTEM\" required=\"true\" secure=\"false\">\n" +
+            "                <attr name=\"type\"><![CDATA[SYSTEM]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[DEMO]]></attr>\n" +
             "                <attr name=\"displayName\"><![CDATA[Код системы-источника]]></attr>\n" +
             "            </GraphParameter>\n" +
-            "            <GraphParameter name=\"SCENARIO_AUTHOR\" value=\"Alexander\" required=\"false\" secure=\"false\">\n" +
+            "            <GraphParameter name=\"SCENARIO_AUTHOR\" required=\"false\" secure=\"false\">\n" +
+            "                <attr name=\"type\"><![CDATA[SYSTEM]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[Alexander]]></attr>\n" +
             "                <attr name=\"displayName\"><![CDATA[Автор сценария]]></attr>\n" +
             "            </GraphParameter>\n" +
-            "            <GraphParameter name=\"SCENARIO_CREATED\" value=\"2020-01-01 12:00:00.000\" required=\"false\" secure=\"false\">\n" +
+            "            <GraphParameter name=\"SCENARIO_CREATED\" required=\"false\" secure=\"false\">\n" +
+            "                <attr name=\"type\"><![CDATA[SYSTEM]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[2020-01-01 12:00:00.000]]></attr>\n" +
             "                <attr name=\"displayName\"><![CDATA[Дата создания]]></attr>\n" +
             "            </GraphParameter>\n" +
-            "            <GraphParameter name=\"SCENARIO_UPDATED\" value=\"2020-01-02 15:30:00.000\" required=\"false\" secure=\"false\">\n" +
+            "            <GraphParameter name=\"SCENARIO_UPDATED\" required=\"false\" secure=\"false\">\n" +
+            "                <attr name=\"type\"><![CDATA[SYSTEM]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[2020-01-02 15:30:00.000]]></attr>\n" +
             "                <attr name=\"displayName\"><![CDATA[Дата последней правки]]></attr>\n" +
             "            </GraphParameter>\n" +
             "        </GraphParameters>\n" +

@@ -13,6 +13,7 @@ import ru.xander.etl.graph.graph.xml.Record;
 import ru.xander.etl.graph.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,8 +23,6 @@ import static ru.xander.etl.graph.graph.converter.Converter.*;
  * @author Alexander Shakhov
  */
 class ScenarioConverter {
-
-    public static final String ATTRIBUTE_DISPLAY_NAME = "displayName";
 
     public Graph convertToGraph(EtlScenario scenario) {
         Graph graph = new Graph();
@@ -82,63 +81,77 @@ class ScenarioConverter {
     private GraphParameter createScenarioNameParameter(EtlScenario scenario) {
         GraphParameter parameter = new GraphParameter();
         parameter.setName(PARAMETER_SCENARIO_NAME);
-        parameter.setValue(scenario.getName());
         parameter.setRequired(true);
-        parameter.setAttrList(Collections.singletonList(createAttr(ATTRIBUTE_DISPLAY_NAME, "Имя сценария")));
+        parameter.setAttrList(Arrays.asList(
+                createAttr(ATTRIBUTE_TYPE, PARAM_TYPE_SYSTEM),
+                createAttr(ATTRIBUTE_VALUE, scenario.getName()),
+                createAttr(ATTRIBUTE_DISPLAY_NAME, "Имя сценария")));
         return parameter;
     }
 
     private GraphParameter createScenarioVersionParameter(EtlScenario scenario) {
         GraphParameter parameter = new GraphParameter();
         parameter.setName(PARAMETER_SCENARIO_VERSION);
-        parameter.setValue(String.valueOf(scenario.getVersion()));
         parameter.setRequired(true);
-        parameter.setAttrList(Collections.singletonList(createAttr(ATTRIBUTE_DISPLAY_NAME, "Версия сценария")));
+        parameter.setAttrList(Arrays.asList(
+                createAttr(ATTRIBUTE_TYPE, PARAM_TYPE_SYSTEM),
+                createAttr(ATTRIBUTE_VALUE, String.valueOf(scenario.getVersion())),
+                createAttr(ATTRIBUTE_DISPLAY_NAME, "Версия сценария")));
         return parameter;
     }
 
     private GraphParameter createScenarioDescriptionParameter(EtlScenario scenario) {
         GraphParameter parameter = new GraphParameter();
         parameter.setName(PARAMETER_SCENARIO_DESCRIPTION);
-        parameter.setValue(scenario.getDescription());
         parameter.setRequired(true);
-        parameter.setAttrList(Collections.singletonList(createAttr(ATTRIBUTE_DISPLAY_NAME, "Описание сценария")));
+        parameter.setAttrList(Arrays.asList(
+                createAttr(ATTRIBUTE_TYPE, PARAM_TYPE_SYSTEM),
+                createAttr(ATTRIBUTE_VALUE, scenario.getDescription()),
+                createAttr(ATTRIBUTE_DISPLAY_NAME, "Описание сценария")));
         return parameter;
     }
 
     private GraphParameter createScenarioOuterSystemParameter(EtlScenario scenario) {
         GraphParameter parameter = new GraphParameter();
         parameter.setName(PARAMETER_SCENARIO_OUTER_SYSTEM);
-        parameter.setValue(scenario.getOuterSystem());
         parameter.setRequired(true);
-        parameter.setAttrList(Collections.singletonList(createAttr(ATTRIBUTE_DISPLAY_NAME, "Код системы-источника")));
+        parameter.setAttrList(Arrays.asList(
+                createAttr(ATTRIBUTE_TYPE, PARAM_TYPE_SYSTEM),
+                createAttr(ATTRIBUTE_VALUE, scenario.getOuterSystem()),
+                createAttr(ATTRIBUTE_DISPLAY_NAME, "Код системы-источника")));
         return parameter;
     }
 
     private GraphParameter createScenarioAuthorParameter(EtlScenario scenario) {
         GraphParameter parameter = new GraphParameter();
         parameter.setName(PARAMETER_SCENARIO_AUTHOR);
-        parameter.setValue(scenario.getAuthor());
         parameter.setRequired(false);
-        parameter.setAttrList(Collections.singletonList(createAttr(ATTRIBUTE_DISPLAY_NAME, "Автор сценария")));
+        parameter.setAttrList(Arrays.asList(
+                createAttr(ATTRIBUTE_TYPE, PARAM_TYPE_SYSTEM),
+                createAttr(ATTRIBUTE_VALUE, scenario.getAuthor()),
+                createAttr(ATTRIBUTE_DISPLAY_NAME, "Автор сценария")));
         return parameter;
     }
 
     private GraphParameter createScenarioCreatedParameter(EtlScenario scenario) {
         GraphParameter parameter = new GraphParameter();
         parameter.setName(PARAMETER_SCENARIO_CREATED);
-        parameter.setValue(Utils.formatDateTime(scenario.getCreated()));
         parameter.setRequired(false);
-        parameter.setAttrList(Collections.singletonList(createAttr(ATTRIBUTE_DISPLAY_NAME, "Дата создания")));
+        parameter.setAttrList(Arrays.asList(
+                createAttr(ATTRIBUTE_TYPE, PARAM_TYPE_SYSTEM),
+                createAttr(ATTRIBUTE_VALUE, Utils.formatDateTime(scenario.getCreated())),
+                createAttr(ATTRIBUTE_DISPLAY_NAME, "Дата создания")));
         return parameter;
     }
 
     private GraphParameter createScenarioUpdatedParameter(EtlScenario scenario) {
         GraphParameter parameter = new GraphParameter();
         parameter.setName(PARAMETER_SCENARIO_UPDATED);
-        parameter.setValue(Utils.formatDateTime(scenario.getUpdated()));
         parameter.setRequired(false);
-        parameter.setAttrList(Collections.singletonList(createAttr(ATTRIBUTE_DISPLAY_NAME, "Дата последней правки")));
+        parameter.setAttrList(Arrays.asList(
+                createAttr(ATTRIBUTE_TYPE, PARAM_TYPE_SYSTEM),
+                createAttr(ATTRIBUTE_VALUE, Utils.formatDateTime(scenario.getUpdated())),
+                createAttr(ATTRIBUTE_DISPLAY_NAME, "Дата последней правки")));
         return parameter;
     }
 

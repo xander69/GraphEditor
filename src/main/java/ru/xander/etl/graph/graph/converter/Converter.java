@@ -16,6 +16,12 @@ public class Converter {
     public static final String PARAMETER_SCENARIO_CREATED = "SCENARIO_CREATED";
     public static final String PARAMETER_SCENARIO_UPDATED = "SCENARIO_UPDATED";
 
+    public static final String ATTRIBUTE_TYPE = "type";
+    public static final String ATTRIBUTE_VALUE = "value";
+    public static final String ATTRIBUTE_DISPLAY_NAME = "displayName";
+
+    public static final String PARAM_TYPE_SYSTEM = "SYSTEM";
+
     public static Graph scenarioToGraph(EtlScenario scenario) {
         return new ScenarioConverter().convertToGraph(scenario);
     }

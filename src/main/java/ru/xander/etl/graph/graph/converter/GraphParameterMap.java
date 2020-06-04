@@ -1,15 +1,15 @@
 package ru.xander.etl.graph.graph.converter;
 
-import org.springframework.util.StringUtils;
+import ru.xander.etl.graph.graph.xml.Attr;
 import ru.xander.etl.graph.graph.xml.Graph;
 import ru.xander.etl.graph.graph.xml.GraphParameter;
-import ru.xander.etl.graph.util.Utils;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static ru.xander.etl.graph.graph.converter.Converter.ATTRIBUTE_VALUE;
 
 /**
  * @author Alexander Shakhov
@@ -23,38 +23,28 @@ public class GraphParameterMap {
     }
 
     public String getValue(String parameterName) {
-        return getValue(parameterName, null);
-    }
-
-    public String getValue(String parameterName, String defaultValue) {
-        GraphParameter graphParameter = parameterMap.get(parameterName);
-        if (graphParameter == null) {
-            return defaultValue;
-        }
-        return graphParameter.getValue();
-    }
-
-    public Integer getIntValue(String parameterName) {
-        return getIntValue(parameterName, null);
-    }
-
-    public Integer getIntValue(String parameterName, Integer defaultValue) {
-        GraphParameter graphParameter = parameterMap.get(parameterName);
-        if (graphParameter == null) {
-            return defaultValue;
-        }
-        if (StringUtils.isEmpty(graphParameter.getValue())) {
+        GraphParameter parameter = parameterMap.get(parameterName);
+        if (parameter == null){
             return null;
         }
-        return Integer.parseInt(graphParameter.getValue());
+        Attr attr = getAttr(parameter, ATTRIBUTE_VALUE);
+        if (attr == null) {
+            return parameter.getValue();
+        }
+        return attr.getValue();
     }
 
-    public LocalDateTime getDateTimeValue(String parameterValue) {
-        GraphParameter graphParameter = parameterMap.get(parameterValue);
-        if (graphParameter == null) {
+    private Attr getAttr(GraphParameter graphParameter, String attrName) {
+        List<Attr> attrList = graphParameter.getAttrList();
+        if (attrList == null) {
             return null;
         }
-        return Utils.parseDateTime(graphParameter.getValue());
+        for (Attr attr : attrList) {
+            if (attrName.equals(attr.getName())) {
+                return attr;
+            }
+        }
+        return null;
     }
 
     public static GraphParameterMap forGraph(Graph graph) {
