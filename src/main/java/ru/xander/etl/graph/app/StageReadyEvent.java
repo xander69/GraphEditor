@@ -4,6 +4,9 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
+/**
+ * @author Alexander Shakhov
+ */
 public class StageReadyEvent extends ApplicationEvent {
 
     @Getter

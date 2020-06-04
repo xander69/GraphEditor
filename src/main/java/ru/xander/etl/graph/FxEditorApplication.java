@@ -7,6 +7,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import ru.xander.etl.graph.app.StageReadyEvent;
 
+/**
+ * @author Alexander Shakhov
+ */
 public class FxEditorApplication extends Application {
     private ConfigurableApplicationContext applicationContext;
 

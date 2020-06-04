@@ -11,6 +11,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import ru.xander.etl.graph.controller.MainController;
 
+/**
+ * @author Alexander Shakhov
+ */
 @Component
 public class PrimaryStageInitializer implements ApplicationListener<StageReadyEvent> {
 

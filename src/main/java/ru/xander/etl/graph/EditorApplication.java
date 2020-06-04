@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * @author Alexander Shakhov
+ */
 @SpringBootApplication
 public class EditorApplication {
     public static void main(String[] args) {
