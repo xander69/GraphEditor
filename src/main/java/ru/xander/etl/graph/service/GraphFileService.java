@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import ru.xander.etl.graph.app.Preferences;
 import ru.xander.etl.graph.graph.etl.EtlScenario;
 
 import java.io.File;
@@ -63,6 +64,7 @@ public class GraphFileService {
             for (File file : files) {
                 GraphFile graphFile = new GraphFile();
                 graphFile.setFile(file);
+                graphFile.setState(GraphFile.State.SAVED);
                 graphFiles.add(graphFile);
             }
         }
@@ -72,7 +74,7 @@ public class GraphFileService {
         return EtlScenario.builder()
                 .version(1)
                 .name(scenarioName)
-                .author(System.getProperty("user.name"))
+                .author(Preferences.getPreferences().getAuthor())
                 .created(LocalDateTime.now())
                 .updated(LocalDateTime.now())
                 .startupParams(new ArrayList<>())

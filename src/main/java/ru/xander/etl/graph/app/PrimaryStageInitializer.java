@@ -37,9 +37,11 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
             stage.setScene(scene);
         });
         controllerAndView.getController().startup();
+        Preferences.initialize();
         stage.setTitle("Graph Editor v1.0");
         stage.setMinWidth(MIN_WIDTH);
         stage.setMinHeight(MIN_HEIGHT);
+        stage.setOnCloseRequest(event -> Preferences.save());
         stage.show();
     }
 }
