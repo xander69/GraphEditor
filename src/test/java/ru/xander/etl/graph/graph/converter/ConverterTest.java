@@ -103,6 +103,28 @@ public class ConverterTest {
             "                <attr name=\"dataType\"><![CDATA[STRING]]></attr>\n" +
             "                <attr name=\"value\"><![CDATA[DEMO_FOLDER]]></attr>\n" +
             "            </GraphParameter>\n" +
+            "            <GraphParameter name=\"LOADING_STAGE\" required=\"false\" secure=\"false\">\n" +
+            "                <attr name=\"paramType\"><![CDATA[STAGE]]></attr>\n" +
+            "                <attr name=\"phaseNum\"><![CDATA[0]]></attr>\n" +
+            "                <attr name=\"displayName\"><![CDATA[Этап загрузки]]></attr>\n" +
+            "                <attr name=\"description\"><![CDATA[Выполняет извлечение данных и их загрузку в стейджинг]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[true]]></attr>\n" +
+            "            </GraphParameter>\n" +
+            "            <GraphParameter name=\"VALIDATE\" required=\"true\" secure=\"false\">\n" +
+            "                <attr name=\"paramType\"><![CDATA[STAGE_STARTUP]]></attr>\n" +
+            "                <attr name=\"order\"><![CDATA[1]]></attr>\n" +
+            "                <attr name=\"displayName\"><![CDATA[Валидация]]></attr>\n" +
+            "                <attr name=\"description\"><![CDATA[Выполнять валидацию файлов по XSD]]></attr>\n" +
+            "                <attr name=\"dataType\"><![CDATA[BOOLEAN]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[true]]></attr>\n" +
+            "                <attr name=\"phaseNum\"><![CDATA[0]]></attr>\n" +
+            "            </GraphParameter>\n" +
+            "            <GraphParameter name=\"PUBLISH_STAGE\" required=\"false\" secure=\"false\">\n" +
+            "                <attr name=\"paramType\"><![CDATA[STAGE]]></attr>\n" +
+            "                <attr name=\"phaseNum\"><![CDATA[1]]></attr>\n" +
+            "                <attr name=\"displayName\"><![CDATA[Этап публикации]]></attr>\n" +
+            "                <attr name=\"value\"><![CDATA[false]]></attr>\n" +
+            "            </GraphParameter>\n" +
             "        </GraphParameters>\n" +
             "    </Global>\n" +
             "</Graph>\n";
@@ -271,6 +293,31 @@ public class ConverterTest {
 
         assertEtlParameter(internalParams.get(0),
                 null, "SUBFOLDER_IN", null, null, EtlParameterType.STRING, "DEMO_FOLDER", false, false);
+
+        List<EtlStage> stages = scenario.getStages();
+        Assert.assertNotNull(stages);
+        Assert.assertEquals(2, stages.size());
+
+        stages.sort(Comparator.comparingInt(EtlStage::getPhaseNum));
+
+        assertEtlStage(stages.get(0),
+                0, "LOADING_STAGE",
+                "Этап загрузки",
+                "Выполняет извлечение данных и их загрузку в стейджинг",
+                true);
+
+        assertEtlStage(stages.get(1),
+                1, "PUBLISH_STAGE",
+                "Этап публикации", null, false);
+
+        List<EtlParameter> stageParameters = stages.get(0).getParameters();
+        Assert.assertNotNull(stageParameters);
+        Assert.assertEquals(1, stageParameters.size());
+
+        assertEtlParameter(stageParameters.get(0),
+                1, "VALIDATE",
+                "Валидация", "Выполнять валидацию файлов по XSD",
+                EtlParameterType.BOOLEAN, "true", true, false);
     }
 
     private static void assertEtlParameter(EtlParameter expected,
@@ -291,5 +338,19 @@ public class ConverterTest {
         Assert.assertEquals(value, expected.getValue());
         Assert.assertEquals(required, expected.isRequired());
         Assert.assertEquals(secure, expected.isSecure());
+    }
+
+    private static void assertEtlStage(EtlStage expected,
+                                       int phaseNum,
+                                       String name,
+                                       String displayName,
+                                       String description,
+                                       boolean enabled) {
+        Assert.assertNotNull(expected);
+        Assert.assertEquals(phaseNum, expected.getPhaseNum());
+        Assert.assertEquals(name, expected.getName());
+        Assert.assertEquals(displayName, expected.getDisplayName());
+        Assert.assertEquals(description, expected.getDescription());
+        Assert.assertEquals(enabled, expected.isEnabled());
     }
 }

@@ -3,6 +3,7 @@ package ru.xander.etl.graph.graph.converter;
 import org.springframework.util.StringUtils;
 import ru.xander.etl.graph.graph.etl.EtlParameter;
 import ru.xander.etl.graph.graph.etl.EtlParameterType;
+import ru.xander.etl.graph.graph.etl.EtlStage;
 import ru.xander.etl.graph.graph.xml.Attr;
 import ru.xander.etl.graph.graph.xml.Graph;
 import ru.xander.etl.graph.graph.xml.GraphParameter;
@@ -61,11 +62,45 @@ public class GraphParameterMap {
         return parameters;
     }
 
+    public List<EtlStage> getStages() {
+        Map<Integer, List<EtlParameter>> stageParameters = collectStageParameters();
+        List<EtlStage> stages = new ArrayList<>();
+        for (Map.Entry<String, Map<String, String>> entry : parameterAttributesMap.entrySet()) {
+            Map<String, String> attributes = entry.getValue();
+            String paramType = attributes.get(ATTRIBUTE_PARAM_TYPE);
+            if (PARAM_TYPE_STAGE.equals(paramType)) {
+                int phaseNum = Utils.parseInt(attributes.get(ATTRIBUTE_PHASE_NUM), 0);
+                EtlStage stage = EtlStage.builder()
+                        .phaseNum(phaseNum)
+                        .name(entry.getKey())
+                        .displayName(attributes.get(ATTRIBUTE_DISPLAY_NAME))
+                        .description(attributes.get(ATTRIBUTE_DESCRIPTION))
+                        .enabled(Boolean.parseBoolean(attributes.get(ATTRIBUTE_VALUE)))
+                        .parameters(stageParameters.get(phaseNum))
+                        .build();
+                stages.add(stage);
+            }
+        }
+        return stages;
+    }
+
     private EtlParameterType getDataType(String dataType) {
         if (StringUtils.isEmpty(dataType)) {
             return EtlParameterType.STRING;
         }
         return EtlParameterType.valueOf(dataType);
+    }
+
+    private Map<Integer, List<EtlParameter>> collectStageParameters() {
+        List<EtlParameter> stageParameters = getParametersByType(PARAM_TYPE_STAGE_STARTUP);
+        Map<Integer, List<EtlParameter>> stageParametersMap = new HashMap<>();
+        for (EtlParameter stageParameter : stageParameters) {
+            Map<String, String> attributes = parameterAttributesMap.get(stageParameter.getName());
+            int phaseNum = Utils.parseInt(attributes.get(ATTRIBUTE_PHASE_NUM), 0);
+            List<EtlParameter> phaseParameters = stageParametersMap.computeIfAbsent(phaseNum, k -> new ArrayList<>());
+            phaseParameters.add(stageParameter);
+        }
+        return stageParametersMap;
     }
 
     public static GraphParameterMap forGraph(Graph graph) {

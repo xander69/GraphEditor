@@ -26,6 +26,7 @@ class GraphConverter {
                 .startupParams(parameterMap.getParametersByType(PARAM_TYPE_STARTUP))
                 .contextParams(parameterMap.getParametersByType(PARAM_TYPE_CONTEXT))
                 .internalParams(parameterMap.getParametersByType(PARAM_TYPE_INTERNAL))
+                .stages(parameterMap.getStages())
                 .build();
     }
 }

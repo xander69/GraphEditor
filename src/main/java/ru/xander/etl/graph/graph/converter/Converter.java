@@ -28,11 +28,14 @@ public class Converter {
     public static final String ATTRIBUTE_ENUM_VALUES = "enumValues";
     public static final String ATTRIBUTE_ENUM_SEPARATOR = "enumSeparator";
     public static final String ATTRIBUTE_ENUM_MULTIPLE = "enumMultiple";
+    public static final String ATTRIBUTE_PHASE_NUM = "phaseNum";
 
     public static final String PARAM_TYPE_SYSTEM = "SYSTEM";
     public static final String PARAM_TYPE_STARTUP = "STARTUP";
     public static final String PARAM_TYPE_CONTEXT = "CONTEXT";
     public static final String PARAM_TYPE_INTERNAL = "INTERNAL";
+    public static final String PARAM_TYPE_STAGE = "STAGE";
+    public static final String PARAM_TYPE_STAGE_STARTUP = "STAGE_STARTUP";
 
     public static Graph scenarioToGraph(EtlScenario scenario) {
         return new ScenarioConverter().convertToGraph(scenario);

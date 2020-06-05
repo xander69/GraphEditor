@@ -3,6 +3,7 @@ package ru.xander.etl.graph.graph.converter;
 import org.springframework.util.StringUtils;
 import ru.xander.etl.graph.graph.etl.EtlParameter;
 import ru.xander.etl.graph.graph.etl.EtlScenario;
+import ru.xander.etl.graph.graph.etl.EtlStage;
 import ru.xander.etl.graph.graph.xml.Attr;
 import ru.xander.etl.graph.graph.xml.Field;
 import ru.xander.etl.graph.graph.xml.Global;
@@ -63,6 +64,15 @@ class ScenarioConverter {
 
         for (EtlParameter internalParam : scenario.getInternalParams()) {
             graphParameterList.add(createInternalParameter(internalParam));
+        }
+
+        for (EtlStage stage : scenario.getStages()) {
+            graphParameterList.add(createStage(stage));
+            if (stage.getParameters() != null) {
+                for (EtlParameter stageParameter : stage.getParameters()) {
+                    graphParameterList.add(createStageParameter(stageParameter, stage));
+                }
+            }
         }
 
         global.setMetadataList(Collections.singletonList(createMetadataSignal()));
@@ -178,6 +188,31 @@ class ScenarioConverter {
 
     private GraphParameter createInternalParameter(EtlParameter startupParam) {
         return createParameter(startupParam, PARAM_TYPE_INTERNAL);
+    }
+
+    private GraphParameter createStage(EtlStage stage) {
+        GraphParameter parameter = new GraphParameter();
+        parameter.setName(stage.getName());
+
+        List<Attr> attrList = new ArrayList<>();
+        attrList.add(createAttr(ATTRIBUTE_PARAM_TYPE, PARAM_TYPE_STAGE));
+        attrList.add(createAttr(ATTRIBUTE_PHASE_NUM, String.valueOf(stage.getPhaseNum())));
+        if (stage.getDisplayName() != null) {
+            attrList.add(createAttr(ATTRIBUTE_DISPLAY_NAME, stage.getDisplayName()));
+        }
+        if (stage.getDescription() != null) {
+            attrList.add(createAttr(ATTRIBUTE_DESCRIPTION, stage.getDescription()));
+        }
+        attrList.add(createAttr(ATTRIBUTE_VALUE, String.valueOf(stage.isEnabled())));
+
+        parameter.setAttrList(attrList);
+        return parameter;
+    }
+
+    private GraphParameter createStageParameter(EtlParameter stageParameter, EtlStage stage) {
+        GraphParameter graphParameter = createParameter(stageParameter, PARAM_TYPE_STAGE_STARTUP);
+        graphParameter.getAttrList().add(createAttr(ATTRIBUTE_PHASE_NUM, String.valueOf(stage.getPhaseNum())));
+        return graphParameter;
     }
 
     private GraphParameter createParameter(EtlParameter etlParameter, String paramType) {
