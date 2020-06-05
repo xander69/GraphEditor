@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ru.xander.etl.graph.controller.MainController"
-            prefHeight="600.0" prefWidth="800.0">
+<!--suppress JavaFxDefaultTag -->
 
-</AnchorPane>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.xander.etl.graph.controller.MainController">
+    <left>
+        <fx:include fx:id="scenarioList" source="scenarioList.fxml" />
+    </left>
+    <center>
+        <TabPane fx:id="tabsScenarios" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+    </center>
+   <top>
+      <AnchorPane prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="buttonShortcuts" layoutX="1134.0" layoutY="9.0" mnemonicParsing="false" text="Shortcuts..." AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

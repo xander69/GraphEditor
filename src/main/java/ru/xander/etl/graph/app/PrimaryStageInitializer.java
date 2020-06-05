@@ -17,8 +17,8 @@ import ru.xander.etl.graph.controller.MainController;
 @Component
 public class PrimaryStageInitializer implements ApplicationListener<StageReadyEvent> {
 
-    private static final double MIN_WIDTH = 800.0;
-    private static final double MIN_HEIGHT = 600.0;
+    private static final double MIN_WIDTH = 1200.0;
+    private static final double MIN_HEIGHT = 800.0;
 
     private final FxWeaver fxWeaver;
 
@@ -33,8 +33,10 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
         Stage stage = stageReadyEvent.getStage();
         controllerAndView.getView().ifPresent(parent -> {
             Scene scene = new Scene((Parent) parent, MIN_WIDTH, MIN_HEIGHT);
+            scene.getStylesheets().add(getClass().getResource("/views/styles.css").toExternalForm());
             stage.setScene(scene);
         });
+        controllerAndView.getController().startup();
         stage.setTitle("Graph Editor v1.0");
         stage.setMinWidth(MIN_WIDTH);
         stage.setMinHeight(MIN_HEIGHT);
