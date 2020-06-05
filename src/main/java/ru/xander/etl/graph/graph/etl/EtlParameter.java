@@ -12,7 +12,7 @@ import lombok.Setter;
 @Builder
 public class EtlParameter {
 
-    private int order;
+    private Integer order;
     private String name;
     private String displayName;
     private String description;

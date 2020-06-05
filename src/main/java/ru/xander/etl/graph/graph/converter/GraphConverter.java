@@ -23,6 +23,9 @@ class GraphConverter {
                 .outerSystem(parameterMap.getValue(PARAMETER_SCENARIO_OUTER_SYSTEM))
                 .created(Utils.parseDateTime(parameterMap.getValue(PARAMETER_SCENARIO_CREATED)))
                 .updated(Utils.parseDateTime(parameterMap.getValue(PARAMETER_SCENARIO_UPDATED)))
+                .startupParams(parameterMap.getParametersByType(PARAM_TYPE_STARTUP))
+                .contextParams(parameterMap.getParametersByType(PARAM_TYPE_CONTEXT))
+                .internalParams(parameterMap.getParametersByType(PARAM_TYPE_INTERNAL))
                 .build();
     }
 }

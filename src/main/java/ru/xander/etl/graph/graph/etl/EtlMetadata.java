@@ -1,14 +1,16 @@
 package ru.xander.etl.graph.graph.etl;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 /**
  * @author Alexander Shakhov
  */
-@Data
+@Getter
+@Setter
 @Builder
 public class EtlMetadata {
 
